@@ -26,10 +26,15 @@
     color: #111;
 }
 .P_I{
+    text-align: left;
     height: 100px;
     margin-bottom: 15px;
 }
 
 .P_prise{
     margin-top: 5px;
+}
+
+.p_rating{
+    display: flex;
 }
