@@ -1,23 +1,25 @@
 import React from 'react'
 import './Product.css'
 
-export default function Product() {
+export default function Product({id, title, image, prise, rating}) {
     return (
         <div className="product">
             <div className="P_I">
-                <p>An Examined Life</p>
+                <p>{title}</p>
                 <p className="P_prise">
                     <small>₹</small>
-                    <strong>1575</strong>
+                    <strong>{prise}</strong>
                 </p>
                 <div className="p_rating">
-                    <p>🌟</p>
-                    <p>🌟</p>
-                    <p>🌟</p>
+                    {Array(rating)
+                        .fill()
+                        .map((_,i) => (
+                            <p>🌟</p>
+                        ))}
                 </div>
             </div>
             <img 
-                src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Book_Cover_An_Examined_Life.jpg"
+                src={image}
                 alt=" " 
                 />
             <button>Add to Bucket</button>
