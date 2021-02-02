@@ -1,7 +1,23 @@
-import React from 'react'
-import './Product.css'
+import React from 'react';
+import './Product.css';
+import {useStateValue} from './StateProvide';
 
 export default function Product({id, title, image, prise, rating}) {
+    const [{basket}, dispatch] = useStateValue();
+    console.log("This >>>",basket);
+    const addToBasket = () =>{
+        //dispatch item into the dataLayer
+        dispatch({
+            type: 'ADD_TO_BASKET',
+            item: {
+                id: id,
+                title: title,
+                image: image,
+                prise: prise,
+                rating: rating,
+            },
+        });
+    };
     return (
         <div className="product">
             <div className="P_I">
@@ -22,7 +38,7 @@ export default function Product({id, title, image, prise, rating}) {
                 src={image}
                 alt=" " 
                 />
-            <button>Add to Bucket</button>
+            <button onClick={addToBasket}>Add to Bucket</button>
         </div>
     )
 }
