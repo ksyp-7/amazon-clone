@@ -17,7 +17,6 @@ function Checkout() {
                     </div>
             </div>
             <div className="C_reight">
-                <h2>The SubTotal Will go hear</h2>
                 <Subtotal />
             </div>
         </div>
