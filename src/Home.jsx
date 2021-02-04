@@ -28,21 +28,24 @@ function Home() {
                 <Product
                 id={3}
                 title="CHKOKKO Men's Regular Fit Full Sleeves Black Denim Jacket "
-                prise={1,999}
+                prise={749}
                 image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxUuLVY2zqQyhFToQHe7v_kgy9OmPCxtQ18hy-bhTM4r18HfWDfQxFTCIHg2SSOLn_3oSCh4fg&usqp=CAc"
                 rating={4}/>
             
                 <Product 
                 id={4}
                 title="Dell Bassheads 900 On Ear Wireless BT Headphones comes with 40mm Drivers,Aux Connectivity,FM,Call Function,9Hrs* Playback time (Lether White)"
-                prise={2,299}
+                prise={599}
                 image="https://media.istockphoto.com/photos/rendering-white-headphones-isolated-on-white-background-picture-id1183368222?s=612x612"
                 rating={3}/>
                 <Product 
                 id={5}
-                title="New Apple iMac with Retina 5K Display(27-inch,8GB RAM,3.1GHz6-core 10th-ore i5 Processor,512gB SSD Storage"
-                prise={1,76,999}
-                image="http://pngimg.com/uploads/computer_pc/computer_pc_PNG17497.png"
+                title="Bacca Bucci Men's Sneaker ,
+                 Sole: Phylon-EVA+Rubber,
+                Closure: Lace-Up,
+                Shoe Width: Medium"
+                prise={949}
+                image="https://m.media-amazon.com/images/I/61ZCG2zYhiL._SY625._SX._UX._SY._UY_.jpg"
                 rating={4}/>
             </div>
             <div className="home_row">
@@ -50,7 +53,7 @@ function Home() {
                 id={6}
                 title="Hoob, known as creating magnificent-looking hookahs, has come up with a model called Atom C – hookah for those who wants to get some new hookah experience for really attractive price. Extraordinary modern minimalistic design and perfect shisha sessions. Designed for professional and home use."
                 prise={8,999}
-                image="https://hekkpipe.com/wp-content/uploads/2018/08/Hekkpipe-Deluxe-Hookah.jpg"
+                image="https://www.shishascience.com/wp-content/uploads/2020/04/nube-unique-price-russian-hookah-shisha-1024x1012.jpg"
                 rating={4}/>
             </div>
             </div>

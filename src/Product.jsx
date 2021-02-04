@@ -1,8 +1,10 @@
+
 import React from 'react';
 import './Product.css';
 import {useStateValue} from './StateProvide';
+ 
 
-export default function Product({id, title, image, prise, rating}) {
+function Product({id, title, image, prise, rating}) {
     const [{basket}, dispatch] = useStateValue();
     console.log("This >>>",basket);
     const addToBasket = () =>{
@@ -10,11 +12,11 @@ export default function Product({id, title, image, prise, rating}) {
         dispatch({
             type: 'ADD_TO_BASKET',
             item: {
-                id: id,
-                title: title,
-                image: image,
-                prise: prise,
-                rating: rating,
+                id,
+                title,
+                image,
+                prise,
+                rating,
             },
         });
     };
@@ -29,9 +31,9 @@ export default function Product({id, title, image, prise, rating}) {
                 <div className="p_rating">
                     {Array(rating)
                         .fill()
-                        .map((_,i) => (
+                        .map((_,i) => 
                             <p>🌟</p>
-                        ))}
+                        )}
                 </div>
             </div>
             <img 
@@ -42,3 +44,5 @@ export default function Product({id, title, image, prise, rating}) {
         </div>
     )
 }
+
+export default Product

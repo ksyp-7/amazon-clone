@@ -17,7 +17,7 @@ function Subtotal() {
                         </p>
                         <small className="S_G">
                         <input type="checkbox" />
-                        This Order Contains A Gift.
+                        This Order Contains A Gift .
                         </small>
                     </div>
                 )}
