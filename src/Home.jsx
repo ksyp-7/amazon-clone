@@ -1,7 +1,10 @@
 import React from 'react';
 import './Home.css';
 import Product from './Product.jsx';
+import {useStateValue} from './StateProvide';
 function Home() {
+    const [{basket}, dispatch] = useStateValue();
+
     return (
         <div className="home">         
             <div className="home_con">
@@ -15,7 +18,7 @@ function Home() {
                     title="An Examined Life: Essays and Reflections by Karan Singh   Language: English,Item Weight: 170 g"
                     prise={799}
                     image="https://upload.wikimedia.org/wikipedia/commons/2/2f/Book_Cover_An_Examined_Life.jpg"
-                    rating={5}/>
+                    rating={4}/>
                 <Product 
                     id={2}
                     title="Buy Brannd New Iphone 4s white(White, 512MB RAM,32GB),1432 mAh Battery|A5 Dual Core Processor"
@@ -52,7 +55,7 @@ function Home() {
                 <Product 
                 id={6}
                 title="Hoob, known as creating magnificent-looking hookahs, has come up with a model called Atom C – hookah for those who wants to get some new hookah experience for really attractive price. Extraordinary modern minimalistic design and perfect shisha sessions. Designed for professional and home use."
-                prise={8,999}
+                prise={999}
                 image="https://www.shishascience.com/wp-content/uploads/2020/04/nube-unique-price-russian-hookah-shisha-1024x1012.jpg"
                 rating={4}/>
             </div>
