@@ -4,7 +4,7 @@ import './Product.css';
 import {useStateValue} from './StateProvide';
  
 
-function Product({id, title, image, prise, rating}) {
+function Product({prise, id, title, image, rating}) {
     const [{basket}, dispatch] = useStateValue();
     console.log("This >>>",basket);
     const addToBasket = () =>{
@@ -22,6 +22,7 @@ function Product({id, title, image, prise, rating}) {
     };
     return (
         <div className="product">
+        {console.log(prise)}
             <div className="P_I">
                 <p>{title}</p>
                 <p className="P_prise">
@@ -40,6 +41,7 @@ function Product({id, title, image, prise, rating}) {
                 src={image}
                 alt=" " 
                 />
+                
             <button onClick={addToBasket}>Add to Bucket</button>
         </div>
     )
