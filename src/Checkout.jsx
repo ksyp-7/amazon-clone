@@ -5,7 +5,7 @@ import CP from './CP'
 import {useStateValue} from './StateProvide';
 
 function Checkout() {
-    const [{basket}, dispatch] = useStateValue();
+    const [{basket, user}, dispatch] = useStateValue();
 
     return (
         <div className="checkout">
@@ -15,6 +15,7 @@ function Checkout() {
                     alt=" " 
                     />
                     <div>
+                        <h3>Hello, {user?.email}</h3>
                         <h2 className="c_t">
                         Your Shoping Basket
                         </h2>
