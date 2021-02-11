@@ -1,5 +1,9 @@
+import React, { Component } from 'react'
+import { Link, browserHistory } from 'react-router'
+
 export const initialState = {
     basket: [],
+    user: null
 };
 
 //selector
@@ -13,6 +17,11 @@ const reducer = (state, action) =>{
                 ...state,
                 basket: [...state.basket, action.item],
             };
+        case 'EMTY_BUSTET':
+            return{
+                ...state,
+                basket: []
+            }
 
         case "REMOVE_FROM_BASKET":
             const index = state.basket.findIndex(
@@ -31,6 +40,12 @@ const reducer = (state, action) =>{
                 ...state,
                 basket: newBasket
             }
+
+            case "SET_USER":
+                return{
+                    ...state,
+                    user: action.user
+                }
         default:
             return state;
     }
