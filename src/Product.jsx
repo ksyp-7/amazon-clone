@@ -1,4 +1,3 @@
-
 import React from 'react';
 import './Product.css';
 import {useStateValue} from './StateProvide';
@@ -6,7 +5,7 @@ import {useStateValue} from './StateProvide';
 
 function Product({prise, id, title, image, rating}) {
     const [{basket}, dispatch] = useStateValue();
-    console.log("This >>>",basket);
+
     const addToBasket = () =>{
         //dispatch item into the dataLayer
         dispatch({
@@ -22,7 +21,6 @@ function Product({prise, id, title, image, rating}) {
     };
     return (
         <div className="product">
-        {console.log(prise)}
             <div className="P_I">
                 <p>{title}</p>
                 <p className="P_prise">
