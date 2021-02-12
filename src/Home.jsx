@@ -1,4 +1,4 @@
-import React from 'react';
+ import React from 'react';
 import './Home.css';
 import Product from './Product.jsx';
 import {useStateValue} from './StateProvide';
