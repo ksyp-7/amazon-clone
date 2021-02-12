@@ -1,20 +1,18 @@
-import React, { useState, useEffect } from 'react'
-import CP from './CP';
-import './Payment.css'
+import React, { useState, useEffect } from 'react';
+import './Payment.css';
 import { useStateValue } from './StateProvide';
-import { Link, useHistory } from 'react-router-dom';
-import Subtotal from './Subtotal';
-import { useElements, useStripe, CardElement } from '@stripe/react-stripe-js';
+import CP from "./CP";
+import { Link, useHistory } from "react-router-dom";
+import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import CurrencyFormat from "react-currency-format";
 import { getBasketTotal } from './reduser';
 import axios from './axios';
-import { db } from './firebase';
-
+import { db } from "./firebase";
 
 function Payment() {
 
     // const [{ basket }, user, dispatch] = useStateValue();
-    const [{basket, user , dispatch }] = useStateValue();
+    const [{basket, user }, dispatch, paymentIntent] = useStateValue();
     const stripe = useStripe();
     const elements = useElements();
     const history = useHistory();
@@ -37,8 +35,9 @@ function Payment() {
 
     console.log('the secrate is >>> ', clientSecret);
 
-    console.log("this >>",user)
+    console.log("this >>",user.uid)
     const handelSubmit = async (event) => {
+        // do all the fancy stripe stuff...
         event.preventDefault();
         setProcessing(true);
 
@@ -48,31 +47,32 @@ function Payment() {
             }
 
         }).then(({ paymentIntent }) => {
+            // paymentIntent = payment confirmation
 
             db
-                .collection('users')
-                .doc(user?.uid)
-                .collection('orders')
-                .doc(paymentIntent.id)
-                .set({
-                    basket: basket,
-                    amount: paymentIntent.amount,
-                    created: paymentIntent.created
-                    
-                })
+              .collection('users')
+              .doc(user?.uid)
+              .collection('orders')
+            //   .doc(paymentIntent.id)
+            //   .set({
+            //       basket: basket,
+            //       amount: paymentIntent.amount,
+            //       created: paymentIntent.created
+            //   })
 
             setSucceeded(true);
-            setError(null)  
+            setError(null)
             setProcessing(false)
 
-            // dispatch({
-            //     type: 'EMTY_BASKET'
-            // })
+            dispatch({
+                type: 'EMPTY_BASKET'
+            })
 
             history.replace('/orders')
         })
 
     }
+
 
     const handelChange = event => {
         setDisabled(event.empty);
