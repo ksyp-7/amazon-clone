@@ -2,17 +2,19 @@ import React, { useState, useEffect } from 'react'
 import CP from './CP';
 import './Payment.css'
 import { useStateValue } from './StateProvide';
-import { Link,useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import Subtotal from './Subtotal';
 import { useElements, useStripe, CardElement } from '@stripe/react-stripe-js';
 import CurrencyFormat from "react-currency-format";
-import {getBasketTotal} from './reduser';
+import { getBasketTotal } from './reduser';
 import axios from './axios';
+import { db } from './firebase';
 
 
 function Payment() {
 
-    const [{ basket }, user, dispatch] = useStateValue();
+    // const [{ basket }, user, dispatch] = useStateValue();
+    const [{basket, user , dispatch }] = useStateValue();
     const stripe = useStripe();
     const elements = useElements();
     const history = useHistory();
@@ -23,36 +25,57 @@ function Payment() {
     const [clientSecret, setClientSector] = useState(true);
 
     useEffect(() => {
-        const getClientSecret  = async () => {
+        const getClientSecret = async () => {
             const response = await axios({
                 method: 'post',
-                url: `/payments/create?total=${getBasketTotal(basket) * 100}`  
+                url: `/payments/create?total=${getBasketTotal(basket) * 100}`
             });
             setClientSector(response.data.clientSecret)
         }
         getClientSecret();
     }, [basket])
 
+    console.log('the secrate is >>> ', clientSecret);
+
+    console.log("this >>",user)
     const handelSubmit = async (event) => {
         event.preventDefault();
         setProcessing(true);
 
-        const payload = await stripe .confirmCardPayment(clientSecret,{
+        const payload = await stripe.confirmCardPayment(clientSecret, {
             payment_method: {
                 card: elements.getElement(CardElement)
             }
-            
-        }).then(({ paymentIntent }) => {
-            setSucceeded(true);
-            setError(null);
-            setProcessing(false);
 
-            // history.replace('/orders');
+        }).then(({ paymentIntent }) => {
+
+            db
+                .collection('users')
+                .doc(user?.uid)
+                .collection('orders')
+                .doc(paymentIntent.id)
+                .set({
+                    basket: basket,
+                    amount: paymentIntent.amount,
+                    created: paymentIntent.created
+                    
+                })
+
+            setSucceeded(true);
+            setError(null)  
+            setProcessing(false)
+
+            // dispatch({
+            //     type: 'EMTY_BASKET'
+            // })
+
+            history.replace('/orders')
         })
+
     }
 
     const handelChange = event => {
-        setDisabled = (event.empty);
+        setDisabled(event.empty);
         setError(event.error ? event.error.message : "");
     }
     return (
@@ -106,9 +129,7 @@ function Payment() {
                             <div className="pay_prisetag">
                                 <CurrencyFormat
                                     renderText={(value) => (
-                                        <div>
-                                            <h3>Order Total: {value}</h3>
-                                        </div>
+                                        <h3>Order Total: {value}</h3>
                                     )}
                                     decimalScale={2}
                                     value={getBasketTotal(basket)}
@@ -117,7 +138,7 @@ function Payment() {
                                     prefix={"₹"}
                                 />
                                 <button disabled={processing || disabled || succeeded}>
-                                        <span>{processing ? <p>processing</p> : "Buy Now"}</span>
+                                    <span>{processing ? <p>Processing</p> : "Buy Now"}</span>
                                 </button>
                             </div>
 
